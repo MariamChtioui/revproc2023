@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulaires et Chat</title>
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <style>
+    /* Styles CSS pour les formulaires */
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-group {
+      width: 45%;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .form-group textarea {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 8px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* Styles CSS pour l'affichage des informations */
+    .result {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    /* Styles CSS pour la section de chat */
+    .chat {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 200px;
+      overflow-y: scroll;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .message strong {
+      font-weight: bold;
+    }
+
+    .message.student {
+      color: blue;
+    }
+
+    .message.prof {
+      color: green;
+    }
+
+    .chat-input {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-group">
+      <h2>Formulaire pour les étudiants</h2>
+      <div>
+        <label for="student-name">Nom:</label>
+        <input type="text" id="student-name" placeholder="Entrez votre nom">
+      </div>
+      <div>
+        <label for="student-email">Email:</label>
+        <input type="email" id="student-email" placeholder="Entrez votre email">
+      </div>
+      <div>
+        <label for="student-message">Message:</label>
+        <textarea id="student-message" placeholder="Entrez votre message"></textarea>
+      </div>
+      <div>
+        <button onclick="envoyerMessage('student')">Envoyer</button>
+      </div>
+      <div class="result" id="student-result"></div>
+    </div>
+
+    <div class="form-group">
+      <h2>Formulaire pour les professeurs</h2>
+      <div>
+        <label for="prof-name">Nom:</label>
+        <input type="text" id="prof-name" placeholder="Entrez votre nom">
+      </div>
+      <div>
+        <label for="prof-email">Email:</label>
+        <input type="email" id="prof-email" placeholder="Entrez votre email">
+      </div>
+      <div>
+        <label for="prof-message">Message:</label>
+        <textarea id="prof-message" placeholder="Entrez votre message"></textarea>
+      </div>
+      <div>
+        <button onclick="envoyerMessage('prof')">Envoyer</button>
+      </div>
+      <div class="result" id="prof-result"></div>
+    </div>
+  </div>
+
+  <div class="chat">
+    <h2>Chat</h2>
+    <div id="message-container"></div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="Entrez votre message">
+      <button onclick="envoyerChat()">Envoyer</button>
+    </div>
+  </div>
+
+  <script>
+    var messages = [];
+
+    function envoyerMessage(type) {
+      var name = document.getElementById(type + '-name').value;
+      var email = document.getElementById(type + '-email').value;
+      var message = document.getElementById(type + '-message').value;
+
+      var resultDiv = document.getElementById(type + '-result');
+      resultDiv.innerHTML = "<h3>Informations saisies :</h3>" +
+                            "<p><strong>Nom :</strong> " + name + "</p>" +
+                            "<p><strong>Email :</strong> " + email + "</p>" +
+                            "<p><strong>Message :</strong> " + message + "</p>";
+    }
+
+    function envoyerChat() {
+      var chatInput = document.getElementById('chat-input');
+      var messageText = chatInput.value;
+      chatInput.value = "";
+
+      var message = {
+        type: "student",
+        text: messageText
+      };
+
+      messages.push(message);
+      afficherChat();
+    }
+
+    function afficherChat() {
+      var messageContainer = document.getElementById('message-container');
+      messageContainer.innerHTML = "";
+
+      for (var i = 0; i < messages.length; i++) {
+        var message = messages[i];
+        var messageElement = document.createElement('div');
+        messageElement.classList.add('message', message.type);
+
+        if (message.type === "student") {
+          messageElement.innerHTML = "<strong>Étudiant:</strong> " + message.text;
+        } else if (message.type === "prof") {
+          messageElement.innerHTML = "<strong>Professeur:</strong> " + message.text;
+        }
+
+        messageContainer.appendChild(messageElement);
+      }
+    }
+  </script>
+</body>
+</html>
