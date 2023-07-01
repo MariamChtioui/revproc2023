@@ -1,185 +1,359 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Formulaires et Chat</title>
-  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
-  <style>
-    /* Styles CSS pour les formulaires */
-    .container {
-      display: flex;
-      justify-content: space-between;
-    }
+    <title>Formulaires et Chat</title>
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 
-    .form-group {
-      width: 45%;
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-
-    .form-group textarea {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-
-    .form-group button {
-      width: 100%;
-      padding: 8px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    /* Styles CSS pour l'affichage des informations */
-    .result {
-      margin-top: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-
-    /* Styles CSS pour la section de chat */
-    .chat {
-      margin-top: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      height: 200px;
-      overflow-y: scroll;
-    }
-
-    .message {
-      margin-bottom: 10px;
-    }
-
-    .message strong {
-      font-weight: bold;
-    }
-
-    .message.student {
-      color: blue;
-    }
-
-    .message.prof {
-      color: green;
-    }
-
-    .chat-input {
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="form-group">
-      <h2>Formulaire pour les étudiants</h2>
-      <div>
-        <label for="student-name">Nom:</label>
-        <input type="text" id="student-name" placeholder="Entrez votre nom">
-      </div>
-      <div>
-        <label for="student-email">Email:</label>
-        <input type="email" id="student-email" placeholder="Entrez votre email">
-      </div>
-      <div>
-        <label for="student-message">Message:</label>
-        <textarea id="student-message" placeholder="Entrez votre message"></textarea>
-      </div>
-      <div>
-        <button onclick="envoyerMessage('student')">Envoyer</button>
-      </div>
-      <div class="result" id="student-result"></div>
-    </div>
-
-    <div class="form-group">
-      <h2>Formulaire pour les professeurs</h2>
-      <div>
-        <label for="prof-name">Nom:</label>
-        <input type="text" id="prof-name" placeholder="Entrez votre nom">
-      </div>
-      <div>
-        <label for="prof-email">Email:</label>
-        <input type="email" id="prof-email" placeholder="Entrez votre email">
-      </div>
-      <div>
-        <label for="prof-message">Message:</label>
-        <textarea id="prof-message" placeholder="Entrez votre message"></textarea>
-      </div>
-      <div>
-        <button onclick="envoyerMessage('prof')">Envoyer</button>
-      </div>
-      <div class="result" id="prof-result"></div>
-    </div>
-  </div>
-
-  <div class="chat">
-    <h2>Chat</h2>
-    <div id="message-container"></div>
-    <div class="chat-input">
-      <input type="text" id="chat-input" placeholder="Entrez votre message">
-      <button onclick="envoyerChat()">Envoyer</button>
-    </div>
-  </div>
-
-  <script>
-    var messages = [];
-
-    function envoyerMessage(type) {
-      var name = document.getElementById(type + '-name').value;
-      var email = document.getElementById(type + '-email').value;
-      var message = document.getElementById(type + '-message').value;
-
-      var resultDiv = document.getElementById(type + '-result');
-      resultDiv.innerHTML = "<h3>Informations saisies :</h3>" +
-                            "<p><strong>Nom :</strong> " + name + "</p>" +
-                            "<p><strong>Email :</strong> " + email + "</p>" +
-                            "<p><strong>Message :</strong> " + message + "</p>";
-    }
-
-    function envoyerChat() {
-      var chatInput = document.getElementById('chat-input');
-      var messageText = chatInput.value;
-      chatInput.value = "";
-
-      var message = {
-        type: "student",
-        text: messageText
-      };
-
-      messages.push(message);
-      afficherChat();
-    }
-
-    function afficherChat() {
-      var messageContainer = document.getElementById('message-container');
-      messageContainer.innerHTML = "";
-
-      for (var i = 0; i < messages.length; i++) {
-        var message = messages[i];
-        var messageElement = document.createElement('div');
-        messageElement.classList.add('message', message.type);
-
-        if (message.type === "student") {
-          messageElement.innerHTML = "<strong>Étudiant:</strong> " + message.text;
-        } else if (message.type === "prof") {
-          messageElement.innerHTML = "<strong>Professeur:</strong> " + message.text;
+    <style>
+        /* Styles CSS pour les formulaires */
+        body {
+            height: 100vh;
+            background: #252425;
+            display: grid;
+            place-content: center;
+            font-family: 'Poppins', sans-serif;
         }
 
-        messageContainer.appendChild(messageElement);
-      }
-    }
-  </script>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group1 {
+            width: 45%;
+            margin-bottom: 15px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #797575;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+
+        .form-group1 label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group1 input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .form-group1 textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .form-group1 button {
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .form-group2 {
+            width: 45%;
+            margin-bottom: 15px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #797575;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+
+        .form-group2 label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group2 input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .form-group2 textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .form-group2 button {
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Styles CSS pour l'affichage des informations */
+        .result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .demande {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Styles CSS pour la section de chat */
+        .chat {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 200px;
+            overflow-y: scroll;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #797575;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message strong {
+            font-weight: bold;
+        }
+
+        .message.student {
+            color: blue;
+        }
+
+        .message.prof {
+            color: green;
+        }
+
+        .chat-input {
+            margin-top: 10px;
+        }
+
+        /* Réinitialisation des styles par défaut */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group1">
+            <h2>Formulaire pour les étudiants</h2>
+            <div>
+                <label for="etudiant-nom">Nom:</label>
+                <input type="text" id="etudiant-nom" placeholder="Entrez votre nom">
+            </div>
+            <div>
+                <label for="etudiant-prenom">Prénom:</label>
+                <input type="text" id="etudiant-prenom" placeholder="Entrez votre prénom">
+            </div>
+            <div>
+                <label for="etudiant-matiere">Matière:</label>
+                <input type="text" id="etudiant-matiere" placeholder="Entrez la matière">
+            </div>
+            <div>
+                <label for="etudiant-niveau">Niveau:</label>
+                <input type="text" id="etudiant-niveau" placeholder="Entrez le niveau">
+            </div>
+            <div>
+                <label for="etudiant-ville">Ville:</label>
+                <input type="text" id="etudiant-ville" placeholder="Entrez la ville">
+            </div>
+            <div>
+                <button onclick="envoyerDemande('etudiant')">Envoyer Demande</button>
+            </div>
+            <div class="result" id="etudiant-result"></div>
+        </div>
+
+        <div class="form-group2">
+            <h2>Formulaire pour les professeurs</h2>
+            <div>
+                <label for="prof-nom">Nom:</label>
+                <input type="text" id="prof-nom" placeholder="Entrez votre nom">
+            </div>
+            <div>
+                <label for="prof-prenom">Prénom:</label>
+                <input type="text" id="prof-prenom" placeholder="Entrez votre prénom">
+            </div>
+            <div>
+                <label for="prof-matiere">Matière:</label>
+                <input type="text" id="prof-matiere" placeholder="Entrez la matière">
+            </div>
+            <div>
+                <label for="prof-niveau">Niveau:</label>
+                <input type="text" id="prof-niveau" placeholder="Entrez le niveau">
+            </div>
+            <div>
+                <label for="prof-ville">Ville:</label>
+                <input type="text" id="prof-ville" placeholder="Entrez la ville">
+            </div>
+            <div>
+                <button onclick="envoyerDemande('prof')">Envoyer Demande</button>
+            </div>
+            <div class="result" id="prof-result"></div>
+        </div>
+    </div>
+
+    <div class="chat">
+        <h2>Chat</h2>
+        <div id="message-container"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Entrez votre message">
+            <button onclick="envoyerChat()">Envoyer</button>
+        </div>
+    </div>
+
+    <script>
+        var messages = [];
+        var demandesEtudiants = [];
+        var demandesProfesseurs = [];
+
+        function envoyerDemande(type) {
+            var nom = document.getElementById(type + '-nom').value;
+            var prenom = document.getElementById(type + '-prenom').value;
+            var matiere = document.getElementById(type + '-matiere').value;
+            var niveau = document.getElementById(type + '-niveau').value;
+            var ville = document.getElementById(type + '-ville').value;
+
+            var demande = {
+                nom: nom,
+                prenom: prenom,
+                matiere: matiere,
+                niveau: niveau,
+                ville: ville
+            };
+
+            if (type === 'etudiant') {
+                demandesEtudiants.push(demande);
+            } else if (type === 'prof') {
+                demandesProfesseurs.push(demande);
+            }
+
+            afficherDemandes();
+            viderFormulaire(type);
+        }
+
+        function afficherDemandes() {
+            var etudiantResultDiv = document.getElementById('etudiant-result');
+            etudiantResultDiv.innerHTML = "<h3>Demandes d'étudiants :</h3>";
+            for (var i = 0; i < demandesEtudiants.length; i++) {
+                var demande = demandesEtudiants[i];
+                etudiantResultDiv.innerHTML +=
+                    "<div class='demande'>" +
+                    "<p><strong>Nom :</strong> " + demande.nom + "</p>" +
+                    "<p><strong>Prénom :</strong> " + demande.prenom + "</p>" +
+                    "<p><strong>Matière :</strong> " + demande.matiere + "</p>" +
+                    "<p><strong>Niveau :</strong> " + demande.niveau + "</p>" +
+                    "<p><strong>Ville :</strong> " + demande.ville + "</p>" +
+                    "<button onclick='commencerChat(\"etudiant\", " + i + ")'>Commencer le chat</button>" +
+                    "</div>";
+            }
+
+            var profResultDiv = document.getElementById('prof-result');
+            profResultDiv.innerHTML = "<h3>Demandes de professeurs :</h3>";
+            for (var j = 0; j < demandesProfesseurs.length; j++) {
+                var demande = demandesProfesseurs[j];
+                profResultDiv.innerHTML +=
+                    "<div class='demande'>" +
+                    "<p><strong>Nom :</strong> " + demande.nom + "</p>" +
+                    "<p><strong>Prénom :</strong> " + demande.prenom + "</p>" +
+                    "<p><strong>Matière :</strong> " + demande.matiere + "</p>" +
+                    "<p><strong>Niveau :</strong> " + demande.niveau + "</p>" +
+                    "<p><strong>Ville :</strong> " + demande.ville + "</p>" +
+                    "<button onclick='commencerChat(\"prof\", " + j + ")'>Commencer le chat</button>" +
+                    "</div>";
+            }
+        }
+
+        function viderFormulaire(type) {
+            document.getElementById(type + '-nom').value = '';
+            document.getElementById(type + '-prenom').value = '';
+            document.getElementById(type + '-matiere').value = '';
+            document.getElementById(type + '-niveau').value = '';
+            document.getElementById(type + '-ville').value = '';
+        }
+
+        function envoyerChat() {
+            var messageInput = document.getElementById('chat-input');
+            var message = messageInput.value;
+            messageInput.value = '';
+
+            messages.push({
+                content: message,
+                sender: 'student'
+            });
+
+            afficherMessages();
+        }
+
+        function commencerChat(type, index) {
+            var demande;
+            if (type === 'etudiant') {
+                demande = demandesEtudiants[index];
+            } else if (type === 'prof') {
+                demande = demandesProfesseurs[index];
+            }
+
+            messages = [];
+            messages.push({
+                content: 'Bonjour, je suis intéressé par votre annonce.',
+                sender: 'student'
+            });
+
+            messages.push({
+                content: 'Pouvez-vous me fournir plus d\'informations ?',
+                sender: 'student'
+            });
+
+            messages.push({
+                content: 'Quand pouvons-nous discuter ?',
+                sender: 'student'
+            });
+
+            afficherMessages();
+        }
+
+        function afficherMessages() {
+            var messageContainer = document.getElementById('message-container');
+            messageContainer.innerHTML = '';
+
+            for (var i = 0; i < messages.length; i++) {
+                var message = messages[i];
+                var messageClass = message.sender === 'student' ? 'student' : 'prof';
+
+                messageContainer.innerHTML +=
+                    "<div class='message " + messageClass + "'>" +
+                    "<strong>" + message.sender.toUpperCase() + ":</strong> " + message.content +
+                    "</div>";
+            }
+
+            // Faites défiler le conteneur vers le bas pour afficher le dernier message
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+    </script>
 </body>
+
 </html>
+   
+
+ 
