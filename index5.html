@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <title>s'identifier</title>
+    <style>
+        * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --linear-grad: linear-gradient(to right, #141E30, #243B55);
+    --grad-clr1: #141E30;
+    --grad-clr2: #243B55;
+}
+
+body {
+    height: 100vh;
+    background: #252425;
+    display: grid;
+    place-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+footer {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+}
+footer mark {
+    padding: 8px 30px;
+    border-radius: 7px;
+}
+footer a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #131212;
+  margin: 0;
+  padding: 0;
+}
+
+.tab-content {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #797575;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.tab-content h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.field-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.field-wrap label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #d69898;
+  margin-bottom: 5px;
+}
+
+.field-wrap input {
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.field-wrap input:focus {
+  outline: none;
+  border-color: #6ac0f1;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #6ac0f1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #55a2d6;
+}
+
+@media (min-width: 600px) {
+  .tab-content {
+    max-width: 600px;
+    margin: 80px auto;
+  }
+}
+
+
+
+
+    </style>
+</head>
+<body>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>Sign Up for Free</h1>
+          
+          <form action="/" method="post">
+          
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name<span class="req">*</span>
+              </label>
+              <input type="text" required autocomplete="off" />
+            </div>
+        
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off"/>
+            </div>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Set A Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off"/>
+          </div>
+          
+          <button type="submit" class="button button-block">Get Started</button>
+          
+          </form>
+
+        </div> 
+</body>
+</html>
